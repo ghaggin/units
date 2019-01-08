@@ -2,3 +2,4 @@
 chrono
 .vscode/
 bin/
+*.exe

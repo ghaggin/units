@@ -1,19 +1,24 @@
 SRC = test_suite.cpp units.cpp
 HDR = units.hpp
-EXE = test.exe
+TEST_EXE = test.exe
 
-FLAGS = -Wall -Werror -pedantic -std=c++11
-
-FILES = $(SRC) $(HDR)
+CPP = g++
+DEBUG = -g
+RELEASE = -O3
+CPP_FLAGS = -Wall -Werror -pedantic -std=c++17
+DEBUG_FLAGS = $(CPP_FLAGS) $(DEBUG)
+RELEASE_FLAGS = $(CPP_FLAGS) $(RELEASE)
 
 LINK = -L /usr/local/lib -l boost_unit_test_framework
 DEF = -DBOOST_TEST_DYN_LINK
 
+FILES = $(SRC) $(HDR)
+
 defaults: test
-	./test
+	./$(TEST_EXE)
 
 test: $(FILES)
-	g++ $(FLAGS) $(SRC) -o $(EXE) $(DEF) $(LINK)
+	$(CXX) $(DEBUG_FLAGS) $(SRC) -o $(TEST_EXE) $(DEF) $(LINK)
 
 clean:
 	rm -vf *.exe
